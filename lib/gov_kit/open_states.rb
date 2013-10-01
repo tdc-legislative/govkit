@@ -22,6 +22,18 @@ module GovKit
         []
       end
     end
+    
+    # Same as get_uri, but returns unparsed array.
+    def self.get_uri_array(uri, options={})
+      options[:query] ||= {}
+      options[:query][:apikey] = GovKit::configuration.sunlight_apikey
+
+      begin
+        (get(URI.encode(uri), options))
+      rescue ResourceNotFound
+        []
+      end
+    end
 
   end
 
@@ -102,6 +114,26 @@ module GovKit
 
       def self.search(options = {})
         get_uri('/committees/', :query => options)
+      end
+    end
+    
+    # The Districts class represents the district data returned from Open States.
+    #
+    # For details about fields returned, see the Open States documentation, at 
+    # See http://sunlightlabs.github.io/openstates-api/districts.html
+    #
+    class Districts < OpenStatesResource 
+      # @param[String] chamber, one of ['upper', 'lower']
+      def self.all(chamber = nil)
+        response = Rails.cache.fetch(['OpenStates','Districts','all',chamber],expires_in: 12.hours) do 
+          get_uri("/districts/mn/#{chamber}")
+        end
+        return Array(response)
+      end
+      
+      def self.boundary(district_id)
+        response = get_uri_array("/districts/boundary/#{district_id}")
+        response
       end
     end
     
