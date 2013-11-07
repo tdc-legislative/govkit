@@ -124,9 +124,9 @@ module GovKit
     #
     class Districts < OpenStatesResource 
       # @param[String] chamber, one of ['upper', 'lower']
-      def self.all(chamber = nil)
+      def self.all(state, chamber = nil)
         response = Rails.cache.fetch(['OpenStates','Districts','all',chamber],expires_in: 12.hours) do 
-          get_uri("/districts/mn/#{chamber}")
+          get_uri("/districts/#{state}/#{chamber}")
         end
         return Array(response)
       end
