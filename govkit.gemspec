@@ -107,7 +107,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<i18n>, [">= 0"])
       s.add_runtime_dependency(%q<activesupport>, [">= 0"])
-      s.add_runtime_dependency(%q<nokogiri>, ["~> 1.5.5"])
+      s.add_runtime_dependency(%q<nokogiri>, ["~> 1.6.0"])
       s.add_runtime_dependency(%q<httparty>, [">= 0.7.4"])
       s.add_runtime_dependency(%q<json>, [">= 1.4.3"])
       s.add_runtime_dependency(%q<fastercsv>, [">= 1.5.3"])
@@ -126,7 +126,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<i18n>, [">= 0"])
     s.add_dependency(%q<activesupport>, [">= 0"])
-    s.add_dependency(%q<nokogiri>, ["~> 1.5.5"])
+    s.add_dependency(%q<nokogiri>, ["~> 1.6.0"])
     s.add_dependency(%q<httparty>, [">= 0.7.4"])
     s.add_dependency(%q<json>, [">= 1.4.3"])
     s.add_dependency(%q<fastercsv>, [">= 1.5.3"])
